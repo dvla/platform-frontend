@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import OAuthButton from './OAuthButton';
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import Amplify, { Auth, Hub} from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+
 import awsconfig from './aws-exports'; // your Amplify configuration
 
 Amplify.configure(awsconfig);
@@ -64,4 +66,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuthenticator(App);
