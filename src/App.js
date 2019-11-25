@@ -1,9 +1,10 @@
 // App.js
 import React, { Component } from 'react';
-import './App.css';
-import OAuthButton from './OAuthButton';
+import './App.scss';
 import Amplify, { Auth, Hub} from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+import { withOAuth } from 'aws-amplify-react';
+import { Navbar, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 import awsconfig from './aws-exports'; // your Amplify configuration
 
@@ -57,13 +58,43 @@ class App extends Component {
   render() {
     const { authState } = this.state;
     return (
-      <div className="App">
-        {authState === 'loading' && (<div>loading...</div>)}
-        {authState === 'signIn' && <OAuthButton/>}
-        {authState === 'signedIn' && <button onClick={this.signOut}>Sign out</button>}
-      </div>
+      <>
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+
+          
+<Navbar.Brand href="/">
+
+
+<img
+      alt=""
+      src="/logo.svg"
+      width="30"
+      height="30"
+      className="d-inline-block align-top"
+    />
+    {' DVLA Cloud Platform'}
+    </Navbar.Brand>
+<Navbar.Toggle />
+<Navbar.Collapse className="justify-content-end">
+  <Navbar.Text>
+nbob
+
+  </Navbar.Text>
+</Navbar.Collapse>
+</Navbar>
+
+
+
+          <div className="App">
+            {authState === 'loading' && (<div>loading...</div>)}
+            {authState === 'signIn' && <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>}
+            {authState === 'signedIn' && <button onClick={this.signOut}>Sign out</button>}
+          </div>
+
+      </>
+
     );
   }
 }
 
-export default withAuthenticator(App);
+export default withOAuth(App);
