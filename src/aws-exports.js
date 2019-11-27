@@ -11,8 +11,8 @@ const awsmobile = {
                 "email",	
                 "profile"	
             ],	
-            "redirectSignIn": "https://platform.chrilliams.co.uk",	
-            "redirectSignOut": "http://platform.chrilliams.co.uk",	
+            "redirectSignIn": "http://localhost:3000",	
+            "redirectSignOut": "http://localhost:3000",	
             "responseType": "code"	
         }	
     }	

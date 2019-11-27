@@ -122,6 +122,7 @@ class App extends Component {
           {authState === "signedIn" && (
             <>
             <Navbar.Text>{this.state.preferred_username}</Navbar.Text>
+            <button onClick={this.refresh}>refresh</button>
             <button onClick={this.signOut}>Sign out</button>
             </>
           )}
@@ -130,7 +131,6 @@ class App extends Component {
 
         <div className="App">
 
-        <button onClick={this.refresh}>refresh</button>
         {authState === "signedIn" && (
             <Routes childProps={authState} />
           )}
