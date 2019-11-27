@@ -1,6 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Container from "react-bootstrap/Container";
 
-export default () =>
-  <div className="Home">
-    <h3>This is the new magic home page</h3>
-  </div>;
+export default class Home extends Component {
+  render() {
+    return (
+      <div className="Home">
+        <Breadcrumb>
+          <Breadcrumb.Item active>Home</Breadcrumb.Item>
+        </Breadcrumb>
+
+        <Container>
+
+          <h1> new home </h1>
+        </Container>
+      </div>
+    );
+  }
+}
