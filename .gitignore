@@ -92,7 +92,7 @@ amplify/backend/awscloudformation
 build/
 dist/
 node_modules/
-aws-exports.js
+#aws-exports.js  # there is nothing secret in here
 awsconfiguration.json
 amplifyconfiguration.json
 amplify-gradle-config.json
