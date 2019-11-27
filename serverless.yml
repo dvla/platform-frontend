@@ -1,0 +1,98 @@
+service: static-website
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-1
+  profile: default
+  memorySize: 256 # optional, in MB, default is 1024
+  stage: dev
+
+plugins:
+  - serverless-s3-sync
+
+
+custom:
+  client:
+    bucketName: dvla-platform
+  s3Sync:
+    - bucketName: ${self:custom.client.bucketName}
+      localDir: ./build
+
+resources:
+  Resources:
+    WebsiteBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+          BucketName: '${self:custom.client.bucketName}'
+          AccessControl: Private
+          BucketEncryption: 
+            ServerSideEncryptionConfiguration:
+              - ServerSideEncryptionByDefault:
+                  SSEAlgorithm: AES256
+          WebsiteConfiguration:
+            IndexDocument: index.html
+            ErrorDocument: index.html
+
+    OriginAccessIdentity:
+      Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+      Properties:
+        CloudFrontOriginAccessIdentityConfig:
+          Comment: "CloudFrontOriginAccessIdentity for DVLA Platform"
+    WebsiteBucketBucketPolicy:
+      Type: "AWS::S3::BucketPolicy"
+      DependsOn: WebsiteBucket
+      Properties:
+        Bucket: !Ref WebsiteBucket
+        PolicyDocument:
+          Statement:
+          - Action: "s3:GetObject"
+            Effect: Allow
+            Resource: 'arn:aws:s3:::${self:custom.client.bucketName}/*'
+            Principal:
+              CanonicalUser: !GetAtt OriginAccessIdentity.S3CanonicalUserId
+    DNS:
+      Type: AWS::Route53::RecordSetGroup
+      Properties:
+        HostedZoneId: 'ZDT9FH3OUORH7'
+        RecordSets:
+        - Name: platform.int-ac.dvla.gov.uk
+          Type: A
+          AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2
+            DNSName: !GetAtt WebsiteDistribution.DomainName
+    WebsiteDistribution:
+        Type: AWS::CloudFront::Distribution
+        Properties:
+          DistributionConfig:
+              Aliases:
+                - platform.int-ac.dvla.gov.uk
+              DefaultCacheBehavior:
+                TargetOriginId: 'WebsiteBucketOrigin'
+                ViewerProtocolPolicy: 'redirect-to-https'
+                DefaultTTL: 600 # ten minutes
+                MaxTTL: 600 # ten minutes
+                Compress: true
+                ForwardedValues:
+                    QueryString: false
+                    Cookies:
+                      Forward: 'none'
+              DefaultRootObject: 'index.html'
+              CustomErrorResponses: 
+                - ErrorCachingMinTTL: 86400
+                  ErrorCode: 403
+                  ResponseCode: 200
+                  ResponsePagePath: /index.html
+              Enabled: true
+              PriceClass: 'PriceClass_100'
+              HttpVersion: 'http2'
+              ViewerCertificate:
+                SslSupportMethod: sni-only
+                AcmCertificateArn: arn:aws:acm:us-east-1:780059459320:certificate/b4f66a2b-971d-43cf-946f-9acb0241f14e
+              Origins:
+                -
+                    Id: 'WebsiteBucketOrigin'
+                    DomainName: { 'Fn::GetAtt': [ 'WebsiteBucket', 'DomainName' ] }
+                    S3OriginConfig:
+                      OriginAccessIdentity: !Join ["", ["origin-access-identity/cloudfront/", !Ref OriginAccessIdentity]]
+

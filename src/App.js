@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import "./App.scss";
 import Amplify, { Auth, Hub } from "aws-amplify";
 import { Navbar } from "react-bootstrap";
-//import awsconfig from "./aws-exports"; // your Amplify configuration
+import awsconfig from "./aws-exports"; // your Amplify configuration
 
 import Routes from "./Routes";
 
-//Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 
 
 
@@ -131,8 +131,10 @@ class App extends Component {
         <div className="App">
 
         <button onClick={this.refresh}>refresh</button>
-
-        <Routes childProps={authState} />
+        {authState === "signedIn" && (
+            <Routes childProps={authState} />
+          )}
+        
 
 
         </div>
