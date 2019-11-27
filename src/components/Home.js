@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
+import LinkContainer from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 export default class Home extends Component {
   render() {
@@ -12,7 +15,17 @@ export default class Home extends Component {
 
         <Container>
 
-          <h1> new home </h1>
+        <Card>
+        <Card.Header>Kubernetes Secrets</Card.Header>
+        <Card.Body>
+          <Card.Text>
+            Kubernetes secret objects let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys. Putting this information in a secret is safer and more flexible than putting it verbatim in a Pod definition or in a container image
+          </Card.Text>
+          <LinkContainer to="secrets">
+            <Button variant="primary">Create Kubernetes Secret</Button>
+          </LinkContainer>
+        </Card.Body>
+      </Card>
         </Container>
       </div>
     );
