@@ -12,7 +12,9 @@ export default class Home extends Component {
     return (
       <div className="Home">
         <Breadcrumb>
-          <Breadcrumb.Item active>Home</Breadcrumb.Item>
+          <Breadcrumb.Item active data-testid="active breadcrumb">
+            Home
+          </Breadcrumb.Item>
         </Breadcrumb>
 
         <Container>
