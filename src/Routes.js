@@ -1,16 +1,16 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import NotFound from "./containers/NotFound"
-import Home from "./containers/Home"
-import Secrets from "./containers/Secrets"
+import NotFound from './containers/NotFound';
+import Home from './containers/Home';
+import Secrets from './containers/Secrets';
 
-
-export default ({ childProps }) =>
+export default () => (
   <Switch>
     <Route path="/kubernetes/secrets" component={Secrets} />
     <Route path="/" component={Home} />
 
-    { /* Finally, catch all unmatched routes */ }
+    {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
-  </Switch>;
+  </Switch>
+);
