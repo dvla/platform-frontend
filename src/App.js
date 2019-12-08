@@ -22,15 +22,13 @@ class App extends Component {
     Hub.listen('auth', data => {
       switch (data.payload.event) {
         case 'signIn':
-          this.setState({ authState: 'signedIn', authData: data.payload.data });
+          this.setState({ authState: 'signedIn' });
           break;
         case 'signIn_failure':
         case 'customState_failure':
         case 'cognitoHostedUI_failure':
           this.setState({
-            authState: 'signIn',
-            authData: null,
-            authError: null
+            authState: 'signIn'
           });
           break;
         default:
@@ -39,7 +37,6 @@ class App extends Component {
     });
     this.state = {
       authState: 'loading',
-      authData: null,
       authError: null,
       preferredUsername: null
     };
@@ -67,13 +64,14 @@ class App extends Component {
   }
 
   render() {
-    const { authState, authData, authError, preferredUsername } = this.state;
+    const { authState, authError, preferredUsername } = this.state;
 
     return (
       <>
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
           <Navbar.Brand href="/">
             <img
+              style={{ marginRight: 10 }}
               alt=""
               src="/logo.svg"
               width="30"
@@ -98,13 +96,8 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-        <div className="App">
-          {authState === 'signedIn' && <Routes childProps={authState} />}
-        </div>
-        <div className="debug">
-          {authData}
-          {authError}
-        </div>
+        <div className="App">{authState === 'signedIn' && <Routes />}</div>
+        <div className="debug">{authError}</div>
       </>
     );
   }

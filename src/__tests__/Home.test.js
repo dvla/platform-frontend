@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Home from '../containers/Home';
+import Home from '../components/Home';
 
 // eslint-disable-next-line jest/expect-expect
 it('renders without crashing', () => {
