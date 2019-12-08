@@ -7,8 +7,8 @@ const awsmobile = {
     oauth: {
       domain: 'int-platform.auth.eu-west-2.amazoncognito.com',
       scope: ['phone', 'email', 'profile'],
-      redirectSignIn: 'http://platform.chrilliams.co.uk',
-      redirectSignOut: 'http://platform.chrilliams.co.uk',
+      redirectSignIn: 'https://platform.chrilliams.co.uk',
+      redirectSignOut: 'https://platform.chrilliams.co.uk',
       responseType: 'code'
     }
   }
