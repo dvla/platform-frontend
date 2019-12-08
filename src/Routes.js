@@ -7,8 +7,8 @@ import Secrets from './containers/Secrets';
 
 export default () => (
   <Switch>
-    <Route path="/kubernetes/secrets" component={Secrets} />
-    <Route path="/" component={Home} />
+    <Route exact path="/kubernetes/secrets" component={Secrets} />
+    <Route exact path="/" component={Home} />
 
     {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
