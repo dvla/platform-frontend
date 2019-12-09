@@ -22,7 +22,7 @@ class App extends Component {
     Hub.listen('auth', data => {
       switch (data.payload.event) {
         case 'signIn':
-          this.setState({ authState: 'signedIn' });
+          this.setState({ authState: 'signedIn', authError: null });
           break;
         case 'signIn_failure':
         case 'customState_failure':
@@ -97,7 +97,7 @@ class App extends Component {
         </Navbar>
 
         <div className="App">{authState === 'signedIn' && <Routes />}</div>
-        <div className="debug">{authError}</div>
+        <div className="debug">sdfgsd {authError}</div>
       </>
     );
   }
