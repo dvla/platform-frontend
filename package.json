@@ -24,6 +24,7 @@
     "*.{js,jsx}": [
       "pretty-quick --staged",
       "eslint src/ --fix",
+      "react-scripts test",
       "git add"
     ]
   },
