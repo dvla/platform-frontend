@@ -97,7 +97,7 @@ class App extends Component {
         </Navbar>
 
         <div className="App">{authState === 'signedIn' && <Routes />}</div>
-        <div className="debug">sdfgsd {authError}</div>
+        <div className="debug">{authError}</div>
       </>
     );
   }
