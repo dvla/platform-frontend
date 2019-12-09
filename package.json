@@ -18,19 +18,19 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "testci": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "lint-staged": {
     "*.{js,jsx}": [
       "pretty-quick --staged",
       "eslint src/ --fix",
-      "react-scripts test",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "NODE_ENV=production lint-staged"
+      "pre-commit": "NODE_ENV=production lint-staged && npm run testci"
     }
   },
   "eslintConfig": {

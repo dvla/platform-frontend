@@ -10,9 +10,9 @@ Amplify.configure(awsconfig);
 
 class App extends Component {
   static async refresh() {
-    const session = await Auth.currentSession();
-    const user = await Auth.currentAuthenticatedUser();
-    await user.refreshSession(session.getRefreshToken(), async () => {});
+    // const session = await Auth.currentSession();
+    // const user = await Auth.currentAuthenticatedUser();
+    // await user.refreshSession(session.getRefreshToken(), async () => {});
   }
 
   constructor(props) {
