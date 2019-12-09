@@ -10,9 +10,9 @@ Amplify.configure(awsconfig);
 
 class App extends Component {
   static async refresh() {
-    // const session = await Auth.currentSession();
-    // const user = await Auth.currentAuthenticatedUser();
-    // await user.refreshSession(session.getRefreshToken(), async () => {});
+    const session = await Auth.currentSession();
+    const user = await Auth.currentAuthenticatedUser();
+    await user.refreshSession(session.getRefreshToken(), async () => {});
   }
 
   constructor(props) {
@@ -23,6 +23,7 @@ class App extends Component {
       switch (data.payload.event) {
         case 'signIn':
           this.setState({ authState: 'signedIn', authError: null });
+          this.checkUser();
           break;
         case 'signIn_failure':
         case 'customState_failure':
@@ -44,6 +45,10 @@ class App extends Component {
 
   componentDidMount() {
     // check the current user when the App component is loaded
+    this.checkUser();
+  }
+
+  checkUser() {
     Auth.currentAuthenticatedUser()
       .then(user => {
         this.setState({
