@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import NotFound from '../components/NotFound';
+import NotFound from '../views/NotFound';
 
 it('renders page not found', () => {
   const { getByTestId } = render(
@@ -11,6 +11,6 @@ it('renders page not found', () => {
     </MemoryRouter>
   );
   expect(getByTestId('not found message').textContent).toBe(
-    'Sorry, page not found!'
+    'Oops! You’re lost.'
   );
 });

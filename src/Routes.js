@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import NotFound from './components/NotFound';
-import Home from './components/Home';
-import Secrets from './components/secrets/Secrets';
+import NotFound from './views/NotFound';
+import Home from './views/Home';
+import Secrets from './views/secrets/Secrets';
 
 export default () => (
   <Switch>

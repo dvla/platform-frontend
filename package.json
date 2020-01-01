@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4",
     "bootstrap": "^4.4.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-gravatar": "^2.6.3",
     "react-router": "^5.1.2",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2",
@@ -19,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "testci": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/ --fix"
   },
   "lint-staged": {
     "*.{js,jsx}": [

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-
 import Amplify, { Auth, Hub } from 'aws-amplify';
-import { Navbar, Button } from 'react-bootstrap';
 import awsconfig from './aws-exports'; // your Amplify configuration
+import SideBar from './components/SideBar';
+import NavBar from './components/NavBar';
+import Login from './views/Login';
+
 import Routes from './Routes';
 import './App.scss';
 
@@ -21,6 +23,9 @@ class App extends Component {
     // let the Hub module listen on Auth events
     Hub.listen('auth', data => {
       switch (data.payload.event) {
+        case 'signOut':
+          this.setState({ authState: 'signIn' });
+          break;
         case 'signIn':
           this.setState({ authState: 'signedIn', authError: null });
           this.checkUser();
@@ -39,7 +44,8 @@ class App extends Component {
     this.state = {
       authState: 'loading',
       authError: null,
-      preferredUsername: null
+      preferredUsername: null,
+      email: null
     };
   }
 
@@ -54,7 +60,8 @@ class App extends Component {
         this.setState({
           authState: 'signedIn',
           preferredUsername:
-            user.signInUserSession.idToken.payload.preferred_username
+            user.signInUserSession.idToken.payload.preferred_username,
+          email: user.signInUserSession.idToken.payload.email
         });
       })
       .catch(e => {
@@ -69,40 +76,25 @@ class App extends Component {
   }
 
   render() {
-    const { authState, authError, preferredUsername } = this.state;
+    const { authState, authError, preferredUsername, email } = this.state;
 
     return (
       <>
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-          <Navbar.Brand href="/">
-            <img
-              style={{ marginRight: 10 }}
-              alt=""
-              src="/logo.svg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />
-            DVLA Cloud Platform
-          </Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            {authState === 'loading' && <div>loading...</div>}
-            {authState === 'signIn' && (
-              <Button onClick={() => Auth.federatedSignIn()}>logon</Button>
-            )}
-            {authState === 'signedIn' && (
-              <>
-                <Navbar.Text>{preferredUsername}</Navbar.Text>
-                <Button onClick={this.refresh}>refresh</Button>
-                <Button onClick={this.signOut}>Sign out</Button>
-              </>
-            )}
-          </Navbar.Collapse>
-        </Navbar>
+        <div id="wrapper">
+          <SideBar />
+          <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content">
+              <NavBar user={preferredUsername} email={email} />
 
-        <div className="App">{authState === 'signedIn' && <Routes />}</div>
-        <div className="debug">{authError}</div>
+              <div className="App">
+                {authState === 'signedIn' && <Routes />}
+              </div>
+              <div className="App">{authState !== 'signedIn' && <Login />}</div>
+
+              {authError !== null && <p className="debug">{authError}</p>}
+            </div>
+          </div>
+        </div>
       </>
     );
   }

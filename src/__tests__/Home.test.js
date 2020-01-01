@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Home from '../components/Home';
+import Home from '../views/Home';
 
 // eslint-disable-next-line jest/expect-expect
 it('renders without crashing', () => {
@@ -23,5 +23,5 @@ it('renders with or without a name', () => {
       <Home />
     </MemoryRouter>
   );
-  expect(getByTestId('active breadcrumb').textContent).toBe('Home');
+  expect(getByTestId('title').textContent).toBe('Dashboard');
 });
