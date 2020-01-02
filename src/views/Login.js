@@ -19,11 +19,13 @@ export default class Home extends Component {
                     width="200"
                     alt=""
                     src="/big_logo.svg"
-                    className="d-inline-block align-top"
+                    className="d-none d-lg-block align-top"
                   />
                   <Col className="pl-5">
                     <Row>
-                      <h3>DVLA Cloud Platform</h3>
+                      <h3 className="">DVLA Cloud Platform</h3>
+                    </Row>
+                    <Row>
                       <p className="lead">
                         If you require access please contact a member of the
                         Cloud Engineering team.

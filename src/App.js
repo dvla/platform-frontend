@@ -90,8 +90,9 @@ class App extends Component {
                 {authState === 'signedIn' && <Routes />}
               </div>
               <div className="App">{authState !== 'signedIn' && <Login />}</div>
-
-              {authError !== null && <p className="debug">{authError}</p>}
+              <div className="App">
+                {authError && <p className="invisible">{authError}</p>}
+              </div>
             </div>
           </div>
         </div>
