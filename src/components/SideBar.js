@@ -42,41 +42,41 @@ export default class SideBar extends Component {
         <li className="nav-item active">
           <Link to="/" className="nav-link">
             <FontAwesomeIcon icon={faTachometerAlt} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Dashboard</span>
+            <span className="pl-md-2">Dashboard</span>
           </Link>
         </li>
-        <hr className="sidebar-divider d-none d-md-block" />
+        <hr className="sidebar-divider mt-md-3 d-none d-md-block" />
         <div className="sidebar-heading">Kubernetes</div>
         <li className="nav-item">
           <Link to="/kubernetes/deployment" className="nav-link">
             <FontAwesomeIcon icon={faPlaneDeparture} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Deployment</span>
+            <span className="pl-md-2">Deployment</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/kubernetes/secrets" className="nav-link">
             <FontAwesomeIcon icon={faUserSecret} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Secrets</span>
+            <span className="pl-md-2">Secrets</span>
           </Link>
         </li>
-        <hr className="sidebar-divider d-none d-md-block" />
+        <hr className="sidebar-divider mt-md-3 d-none d-md-block" />
         <div className="sidebar-heading">tooling</div>
         <li className="nav-item">
           <Link to="/drone" className="nav-link">
             <FontAwesomeIcon icon={faSimplybuilt} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Drone</span>
+            <span className="pl-md-2">Drone</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/bitbucket" className="nav-link">
             <FontAwesomeIcon icon={faBitbucket} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Bitbucket</span>
+            <span className="pl-md-2">Bitbucket</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/docker" className="nav-link">
             <FontAwesomeIcon icon={faDocker} fixedWidth />
-            <span style={{ marginLeft: 5 }}>Docker Registry</span>
+            <span className="pl-md-2">Docker Registry</span>
           </Link>
         </li>
       </ul>

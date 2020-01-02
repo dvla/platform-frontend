@@ -127,7 +127,7 @@
   }
   .sidebar-heading {
     text-align: center;
-    padding: 0 1rem;
+    padding: 0.75rem 1rem 0rem 1rem;
     font-weight: 800;
     font-size: 0.65rem;
     @extend .text-uppercase;
@@ -162,7 +162,7 @@
         display: block;
         width: 100%;
         text-align: left;
-        padding: 1rem;
+        padding: 1rem 1rem 0rem 1rem;
         width: $sidebar-base-width;
         i {
           font-size: 0.85rem;

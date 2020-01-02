@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { API } from 'aws-amplify';
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 // import Table from "../../components/Table";
 
@@ -39,26 +42,44 @@ export default class Secrets extends Component {
 
           <Card className="shadow mb-4">
             <Card.Body>
-              <Table responsive striped bordered size="sm">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {parameters.map(value => {
-                    return (
-                      <tr key={value.Name}>
-                        <td>{value.Name}</td>
-                        <td>{value.Type}</td>
-                        <td>go</td>
+              <Row>
+                <Col className="d-flex">
+                  <p className="align-middle">
+                    Number of Parameters: {parameters.length}
+                  </p>
+                </Col>
+                <Col className="d-flex flex-row-reverse pb-3">
+                  <Button variant="secondary">Create New</Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Table responsive striped bordered size="sm">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Actions</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+                    </thead>
+                    <tbody>
+                      {parameters.map(value => {
+                        return (
+                          <tr key={value.Name}>
+                            <td className="align-middle">{value.Name}</td>
+                            <td className="align-middle">{value.Type}</td>
+                            <td className="align-middle">
+                              <Button variant="outline-primary" size="sm">
+                                Edit
+                              </Button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
         </div>
