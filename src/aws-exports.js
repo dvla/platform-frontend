@@ -11,6 +11,15 @@ const awsmobile = {
       redirectSignOut: 'https://platform.tooling.dvla.gov.uk',
       responseType: 'code'
     }
+  },
+  API: {
+    endpoints: [
+      {
+        name: 'backend',
+        region: 'eu-west-2',
+        endpoint: 'https://6smehzhm0a.execute-api.eu-west-2.amazonaws.com/int/'
+      }
+    ]
   }
 };
 

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import faPlaneDeparture from '@fortawesome/free-solid-svg-icons/faPlaneDeparture';
-import faTachometerAlt from '@fortawesome/free-solid-svg-icons/faTachometerAlt';
-import faUserSecret from '@fortawesome/free-solid-svg-icons/faUserSecret';
-import faBitbucket from '@fortawesome/free-brands-svg-icons/faBitbucket';
-import faSimplybuilt from '@fortawesome/free-brands-svg-icons/faSimplybuilt';
-import faDocker from '@fortawesome/free-brands-svg-icons/faDocker';
-import Link from 'react-router-dom/Link';
+import {
+  faPlaneDeparture,
+  faUserSecret,
+  faTachometerAlt
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBitbucket,
+  faDocker,
+  faSimplybuilt
+} from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 export default class SideBar extends Component {
   componentDidMount() {}

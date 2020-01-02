@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
+import { API } from 'aws-amplify';
 
 export default class Secrets extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      parameters: [],
+      nextToken: ''
+    };
+  }
+
+  async componentDidMount() {
+    const data1 = await Secrets.getData();
+    console.log(data1);
+
+    this.setState({ parameters: data1.Parameters });
+    this.setState({ nextToken: data1.NextToken });
+  }
+
+  static async getData() {
+    const apiName = 'backend';
+    const path = 'ssm/getParameters/cloud';
+    return API.get(apiName, path);
+  }
 
   render() {
+    const { parameters, nextToken } = this.state;
+
     return (
       <>
         <div className="container-fluid">
@@ -14,6 +37,8 @@ export default class Secrets extends Component {
             this information in a secret is safer and more flexible than putting
             it verbatim in a Pod definition or in a container image
           </p>
+          <p>data {JSON.stringify(parameters)}</p>
+          <p>nextToken {nextToken}</p>
         </div>
       </>
     );

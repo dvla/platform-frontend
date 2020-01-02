@@ -4,7 +4,7 @@ import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Auth } from 'aws-amplify';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import NavLink from 'react-router-dom/NavLink';
+import { NavLink } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 
 export default class NavBar extends Component {
