@@ -1,14 +1,15 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import NotFound from './views/NotFound';
-import Home from './views/Home';
+import NotFound from './views/notFound/NotFound';
+import Home from './views/dashboard/Dashboard';
 import Secrets from './views/secrets/Secrets';
 
 export default () => (
   <Switch>
-    <Route exact path="/kubernetes/secrets" component={Secrets} />
-    <Route exact path="/" component={Home} />
+    <Route path="/kubernetes/secrets" component={Secrets} />
+    <Route path="/dashboard" component={Home} />
+    <Redirect from="/" to="/dashboard" exact />
 
     {/* Finally, catch all unmatched routes */}
     <Route component={NotFound} />

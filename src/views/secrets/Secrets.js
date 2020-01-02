@@ -70,7 +70,7 @@ export default class Secrets extends Component {
                             <td className="align-middle">{value.Type}</td>
                             <td className="align-middle">
                               <Button variant="outline-primary" size="sm">
-                                Edit
+                                Update
                               </Button>
                             </td>
                           </tr>

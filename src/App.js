@@ -3,7 +3,7 @@ import Amplify, { Auth, Hub } from 'aws-amplify';
 import awsconfig from './aws-exports'; // your Amplify configuration
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
-import Login from './views/Login';
+import Login from './views/login/Login';
 
 import Routes from './Routes';
 import './App.scss';

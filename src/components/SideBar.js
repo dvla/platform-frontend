@@ -10,7 +10,7 @@ import {
   faDocker,
   faSimplybuilt
 } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default class SideBar extends Component {
   componentDidMount() {}
@@ -39,45 +39,45 @@ export default class SideBar extends Component {
 
         <hr className="sidebar-divider my-0" />
 
-        <li className="nav-item active">
-          <Link to="/" className="nav-link">
+        <li className="nav-item">
+          <NavLink to="/dashboard" className="nav-link">
             <FontAwesomeIcon icon={faTachometerAlt} fixedWidth />
             <span className="pl-md-2">Dashboard</span>
-          </Link>
+          </NavLink>
         </li>
         <hr className="sidebar-divider mt-md-3 d-none d-md-block" />
         <div className="sidebar-heading">Kubernetes</div>
         <li className="nav-item">
-          <Link to="/kubernetes/deployment" className="nav-link">
+          <NavLink to="/kubernetes/deployment" className="nav-link">
             <FontAwesomeIcon icon={faPlaneDeparture} fixedWidth />
             <span className="pl-md-2">Deployment</span>
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/kubernetes/secrets" className="nav-link">
+          <NavLink to="/kubernetes/secrets" className="nav-link">
             <FontAwesomeIcon icon={faUserSecret} fixedWidth />
             <span className="pl-md-2">Secrets</span>
-          </Link>
+          </NavLink>
         </li>
         <hr className="sidebar-divider mt-md-3 d-none d-md-block" />
         <div className="sidebar-heading">tooling</div>
         <li className="nav-item">
-          <Link to="/drone" className="nav-link">
+          <NavLink to="/drone" className="nav-link">
             <FontAwesomeIcon icon={faSimplybuilt} fixedWidth />
             <span className="pl-md-2">Drone</span>
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/bitbucket" className="nav-link">
+          <NavLink to="/bitbucket" className="nav-link">
             <FontAwesomeIcon icon={faBitbucket} fixedWidth />
             <span className="pl-md-2">Bitbucket</span>
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/docker" className="nav-link">
+          <NavLink to="/docker" className="nav-link">
             <FontAwesomeIcon icon={faDocker} fixedWidth />
             <span className="pl-md-2">Docker Registry</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     );

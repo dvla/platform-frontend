@@ -23,7 +23,9 @@ export default class Home extends Component {
                   />
                   <Col className="pl-5">
                     <Row>
-                      <h3 className="">DVLA Cloud Platform</h3>
+                      <h3 data-testid="title" className="">
+                        DVLA Cloud Platform
+                      </h3>
                     </Row>
                     <Row>
                       <p className="lead">
