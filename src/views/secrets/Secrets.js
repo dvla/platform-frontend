@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { LinkContainer } from 'react-router-bootstrap';
 
 // import Table from "../../components/Table";
 
@@ -22,7 +23,7 @@ export default class Secrets extends Component {
 
   static async getData() {
     const apiName = 'backend';
-    const path = 'ssm/getParameters/cloud';
+    const path = 'ssm/getParameters/kubernetes';
     return API.get(apiName, path);
   }
 
@@ -49,7 +50,9 @@ export default class Secrets extends Component {
                   </p>
                 </Col>
                 <Col className="d-flex flex-row-reverse pb-3">
-                  <Button variant="secondary">Create New</Button>
+                  <LinkContainer to="/kubernetes/secrets/new">
+                    <Button variant="secondary">Create New</Button>
+                  </LinkContainer>
                 </Col>
               </Row>
               <Row>
@@ -69,9 +72,13 @@ export default class Secrets extends Component {
                             <td className="align-middle">{value.Name}</td>
                             <td className="align-middle">{value.Type}</td>
                             <td className="align-middle">
-                              <Button variant="outline-primary" size="sm">
-                                Update
-                              </Button>
+                              <LinkContainer
+                                to={`/kubernetes/secrets/update?name=${value.Name}`}
+                              >
+                                <Button variant="outline-primary" size="sm">
+                                  Updates
+                                </Button>
+                              </LinkContainer>
                             </td>
                           </tr>
                         );
