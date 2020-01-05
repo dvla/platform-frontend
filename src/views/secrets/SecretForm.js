@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { API } from 'aws-amplify';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Formik } from 'formik';
@@ -17,9 +18,10 @@ export default class SecretForm extends Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  handleSubmit(event) {
-    // eslint-disable-next-line no-console
-    console.log(event);
+  handleSubmit(data) {
+    const apiName = 'backend';
+    const path = 'ssm/postParameter';
+    return API.post(apiName, path, { body: data });
   }
 
   render() {

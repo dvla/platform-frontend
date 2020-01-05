@@ -23,5 +23,5 @@ it('renders with or without a name', () => {
       <Page />
     </MemoryRouter>
   );
-  expect(getByTestId('title').textContent).toBe('New Secret');
+  expect(getByTestId('title').textContent).toBe('Kubernetes Secrets');
 });

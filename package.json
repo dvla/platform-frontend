@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "coverage": "react-scripts test --coverage --watchAll=false",
     "test": "react-scripts test",
     "testci": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
@@ -38,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "NODE_ENV=production lint-staged && npm run testci"
+      "pre-commit": "NODE_ENV=production lint-staged && npm run coverage"
     }
   },
   "eslintConfig": {
