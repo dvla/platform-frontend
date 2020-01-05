@@ -11,7 +11,11 @@ export default () => (
   <Switch>
     <Route exact path="/kubernetes/secrets" component={Secrets} />
     <Route exact path="/kubernetes/secrets/new" component={NewSecret} />
-    <Route exact path="/kubernetes/secrets/update" component={UpdateSecret} />
+    <Route
+      exact
+      path="/kubernetes/secrets/update/:name"
+      component={UpdateSecret}
+    />
 
     <Route exact path="/dashboard" component={Home} />
     <Redirect from="/" to="/dashboard" exact />
