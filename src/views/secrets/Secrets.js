@@ -44,7 +44,7 @@ export default class Secrets extends Component {
           <Card className="shadow mb-4">
             <Card.Body>
               <Row>
-                <Col className="d-flex">
+                <Col className="d-flex pb-3">
                   <p className="align-middle">
                     Number of Parameters: {parameters.length}
                   </p>
@@ -66,17 +66,22 @@ export default class Secrets extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {parameters.map(value => {
+                      {parameters.map(secret => {
                         return (
-                          <tr key={value.Name}>
-                            <td className="align-middle">{value.Name}</td>
-                            <td className="align-middle">{value.Type}</td>
+                          <tr key={secret.Name}>
+                            <td className="align-middle">{secret.Name}</td>
+                            <td className="align-middle">{secret.Type}</td>
                             <td className="align-middle">
                               <LinkContainer
-                                to={`/kubernetes/secrets/update?name=${value.Name}`}
+                                to={{
+                                  pathname: `/kubernetes/secrets/update/${encodeURIComponent(
+                                    secret.Name
+                                  )}`,
+                                  state: { secret }
+                                }}
                               >
                                 <Button variant="outline-primary" size="sm">
-                                  Updates
+                                  Update
                                 </Button>
                               </LinkContainer>
                             </td>
