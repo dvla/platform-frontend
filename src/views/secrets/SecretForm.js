@@ -32,6 +32,7 @@ export default class SecretForm extends Component {
         message: 'Kubernetes Secret Updated',
         status: 'success'
       });
+      // <Redirect to={{ pathname: '/order', state: { id: '123' }}}/>
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code

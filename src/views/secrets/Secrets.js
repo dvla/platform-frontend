@@ -25,7 +25,11 @@ export default class Secrets extends Component {
 
   async getData() {
     const apiName = 'backend';
-    const path = 'ssm/getParameters/kubernetes';
+    let path = 'ssm/getParameters/kubernetes';
+    const { group } = this.props;
+    if (group === 'cloud') {
+      path = 'ssm/getParameters/cloud';
+    }
 
     let response = [];
     try {

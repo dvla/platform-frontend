@@ -88,13 +88,13 @@ class App extends Component {
     return (
       <>
         <div id="wrapper">
-          <SideBar />
+          <SideBar group={group} />
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <NavBar user={preferredUsername} email={email} group={group} />
 
               <div className="App">
-                {authState === 'signedIn' && <Routes />}
+                {authState === 'signedIn' && <Routes group={group} />}
               </div>
               <div className="App">{authState !== 'signedIn' && <Login />}</div>
               <div className="App">

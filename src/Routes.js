@@ -7,20 +7,26 @@ import Secrets from './views/secrets/Secrets';
 import UpdateSecret from './views/secrets/UpdateSecret';
 import NewSecret from './views/secrets/NewSecret';
 
-export default () => (
-  <Switch>
-    <Route exact path="/kubernetes/secrets" component={Secrets} />
-    <Route exact path="/kubernetes/secrets/new" component={NewSecret} />
-    <Route
-      exact
-      path="/kubernetes/secrets/update/:name"
-      component={UpdateSecret}
-    />
+export default props => {
+  return (
+    <Switch>
+      <Route
+        exact
+        path="/kubernetes/secrets"
+        render={() => <Secrets group={props.group} />}
+      />
+      <Route exact path="/kubernetes/secrets/new" component={NewSecret} />
+      <Route
+        exact
+        path="/kubernetes/secrets/update/:name"
+        component={UpdateSecret}
+      />
 
-    <Route exact path="/dashboard" component={Home} />
-    <Redirect from="/" to="/dashboard" exact />
+      <Route exact path="/dashboard" component={Home} />
+      <Redirect from="/" to="/dashboard" exact />
 
-    {/* Finally, catch all unmatched routes */}
-    <Route component={NotFound} />
-  </Switch>
-);
+      {/* Finally, catch all unmatched routes */}
+      <Route component={NotFound} />
+    </Switch>
+  );
+};
