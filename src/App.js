@@ -59,6 +59,7 @@ class App extends Component {
       .then(user => {
         this.setState({
           authState: 'signedIn',
+          group: user.signInUserSession.idToken.payload['cognito:groups'][0],
           preferredUsername:
             user.signInUserSession.idToken.payload.preferred_username,
           email: user.signInUserSession.idToken.payload.email
@@ -76,7 +77,13 @@ class App extends Component {
   }
 
   render() {
-    const { authState, authError, preferredUsername, email } = this.state;
+    const {
+      authState,
+      authError,
+      preferredUsername,
+      email,
+      group
+    } = this.state;
 
     return (
       <>
@@ -84,7 +91,7 @@ class App extends Component {
           <SideBar />
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
-              <NavBar user={preferredUsername} email={email} />
+              <NavBar user={preferredUsername} email={email} group={group} />
 
               <div className="App">
                 {authState === 'signedIn' && <Routes />}

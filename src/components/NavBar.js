@@ -11,7 +11,7 @@ export default class NavBar extends Component {
   componentDidMount() {}
 
   render() {
-    const { user, email } = this.props;
+    const { user, email, group } = this.props;
 
     return (
       <Nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -33,17 +33,17 @@ export default class NavBar extends Component {
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                   {user}
                 </span>
-                <Gravatar
-                  email={email}
-                  className="img-profile rounded-circle"
-                />
+                {email && (
+                  <Gravatar
+                    email={email}
+                    className="img-profile rounded-circle"
+                  />
+                )}
               </>
             }
             id="userDropdown"
           >
-            <NavLink className="dropdown-item" to="/profile">
-              Profile
-            </NavLink>
+            <div className="dropdown-item">Profile: {group}</div>
             <NavLink className="dropdown-item" to="/refresh">
               Refresh
             </NavLink>
