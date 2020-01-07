@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Amplify, { Auth, Hub } from 'aws-amplify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import awsconfig from './aws-exports'; // your Amplify configuration
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
@@ -9,6 +11,8 @@ import Routes from './Routes';
 import './App.scss';
 
 Amplify.configure(awsconfig);
+
+toast.configure();
 
 class App extends Component {
   static async refresh() {
@@ -83,6 +87,7 @@ class App extends Component {
         <div id="wrapper">
           <SideBar />
           <div id="content-wrapper" className="d-flex flex-column">
+            <ToastContainer />
             <div id="content">
               <NavBar user={preferredUsername} email={email} />
 

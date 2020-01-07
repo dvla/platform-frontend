@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import Button from 'react-bootstrap/Button';
 import * as yup from 'yup'; // for everything
 import Col from 'react-bootstrap/Col';
+import { toast } from 'react-toastify';
 
 export default class SecretForm extends Component {
   constructor(props) {
@@ -21,7 +22,14 @@ export default class SecretForm extends Component {
   handleSubmit(data) {
     const apiName = 'backend';
     const path = 'ssm/postParameter';
-    return API.post(apiName, path, { body: data });
+
+    API.post(apiName, path, { body: data })
+      .then(() => {
+        // this.setState({ complete: true });
+      })
+      .catch(err => {
+        toast.error(err.message);
+      });
   }
 
   render() {
