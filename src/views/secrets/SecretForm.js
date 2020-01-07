@@ -14,18 +14,19 @@ export default class SecretForm extends Component {
     this.state = {
       name: props.nameProps || '',
       value: '',
-      description: ''
+      description: '',
+      complete: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  handleSubmit(data) {
+  async handleSubmit(data) {
     const apiName = 'backend';
     const path = 'ssm/postParameter';
 
     API.post(apiName, path, { body: data })
       .then(() => {
-        // this.setState({ complete: true });
+        this.setState({ complete: true });
       })
       .catch(err => {
         toast.error(err.message);
@@ -34,7 +35,10 @@ export default class SecretForm extends Component {
 
   render() {
     const { value, description, name } = this.state;
+
     const { nameProps } = this.props;
+    const { complete } = this.state;
+
     const schema = yup.object({
       name: yup
         .string()
@@ -47,90 +51,93 @@ export default class SecretForm extends Component {
       description: yup.string().required()
     });
     return (
-      <Formik
-        validationSchema={schema}
-        onSubmit={this.handleSubmit}
-        initialValues={{
-          name,
-          value,
-          description
-        }}
-      >
-        {({
-          handleSubmit,
-          handleChange,
-          handleBlur,
-          values,
-          touched,
-          errors
-        }) => (
-          <Form noValidate onSubmit={handleSubmit}>
-            <Form.Row>
-              <Form.Group as={Col} md="12" controlId="name">
-                <Form.Label>Name</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    readOnly={nameProps}
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isInvalid={!!touched.name && !!errors.name}
-                  />
-                  <Form.Control.Feedback
-                    data-testid="errors-name"
-                    type="invalid"
-                  >
-                    {errors.name}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+      <>
+        {complete}
+        <Formik
+          validationSchema={schema}
+          onSubmit={this.handleSubmit}
+          initialValues={{
+            name,
+            value,
+            description
+          }}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            values,
+            touched,
+            errors
+          }) => (
+            <Form noValidate onSubmit={handleSubmit}>
+              <Form.Row>
+                <Form.Group as={Col} md="12" controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      readOnly={nameProps}
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      isInvalid={!!touched.name && !!errors.name}
+                    />
+                    <Form.Control.Feedback
+                      data-testid="errors-name"
+                      type="invalid"
+                    >
+                      {errors.name}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
 
-              <Form.Group as={Col} md="12" controlId="value">
-                <Form.Label>Value</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    type="text"
-                    name="value"
-                    value={values.value}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isInvalid={!!touched.value && !!errors.value}
-                  />
-                  <Form.Control.Feedback
-                    data-testid="errors-value"
-                    type="invalid"
-                  >
-                    {errors.value}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+                <Form.Group as={Col} md="12" controlId="value">
+                  <Form.Label>Value</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type="text"
+                      name="value"
+                      value={values.value}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      isInvalid={!!touched.value && !!errors.value}
+                    />
+                    <Form.Control.Feedback
+                      data-testid="errors-value"
+                      type="invalid"
+                    >
+                      {errors.value}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
 
-              <Form.Group as={Col} md="12" controlId="description">
-                <Form.Label>Description</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    type="text"
-                    name="description"
-                    value={values.description}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isInvalid={!!touched.description && !!errors.description}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.description}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-            </Form.Row>
+                <Form.Group as={Col} md="12" controlId="description">
+                  <Form.Label>Description</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type="text"
+                      name="description"
+                      value={values.description}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      isInvalid={!!touched.description && !!errors.description}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.description}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
+              </Form.Row>
 
-            <Button id="submit" type="submit" variant="primary">
-              Update
-            </Button>
-          </Form>
-        )}
-      </Formik>
+              <Button id="submit" type="submit" variant="primary">
+                Update
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </>
     );
   }
 }

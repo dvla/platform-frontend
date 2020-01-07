@@ -6,33 +6,57 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { LinkContainer } from 'react-router-bootstrap';
-
-// import Table from "../../components/Table";
+import DVLAAlert from '../../components/Alert';
 
 export default class Secrets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      parameters: []
+      parameters: [],
+      failure: null
     };
+    this.getData = this.getData.bind(this);
   }
 
   async componentDidMount() {
-    this.setState({ parameters: await Secrets.getData() });
+    const data = await this.getData();
+    this.setState({ parameters: data });
   }
 
-  static async getData() {
+  async getData() {
     const apiName = 'backend';
-    const path = 'ssm/getParameters/kubernetes';
-    return API.get(apiName, path);
+    let path = 'ssm/getParameters/kubernetes';
+    const { group } = this.props;
+    if (group === 'cloud') {
+      path = 'ssm/getParameters/cloud';
+    }
+
+    let response = [];
+    try {
+      response = await API.get(apiName, path);
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        this.setState({ failure: error.message, status: 'danger' });
+      } else if (error.request) {
+        this.setState({ failure: 'Authentication Denied', status: 'danger' });
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        this.setState({ failure: error.message, status: 'danger' });
+      }
+    }
+
+    return response;
   }
 
   render() {
-    const { parameters } = this.state;
+    const { parameters, failure, status } = this.state;
 
     return (
       <>
         <div className="container-fluid">
+          {failure && <DVLAAlert message={failure} status={status} />}
           <h1 className="h3 mb-4 text-gray-800">Kubernetes Secrets</h1>
           <p>
             Kubernetes secret objects let you store and manage sensitive
