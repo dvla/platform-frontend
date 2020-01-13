@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import * as yup from 'yup'; // for everything
 import Col from 'react-bootstrap/Col';
 import { toast } from 'react-toastify';
+import { Redirect } from 'react-router';
 
 export default class SecretForm extends Component {
   constructor(props) {
@@ -24,9 +25,10 @@ export default class SecretForm extends Component {
     const apiName = 'backend';
     const path = 'ssm/postParameter';
 
-    API.post(apiName, path, { body: data })
+    API.post(apiName, path, { body: data, response: true })
       .then(() => {
         this.setState({ complete: true });
+        toast.success('Secret updated successfully');
       })
       .catch(err => {
         toast.error(err.message);
@@ -34,10 +36,9 @@ export default class SecretForm extends Component {
   }
 
   render() {
-    const { value, description, name } = this.state;
+    const { value, description, name, complete } = this.state;
 
     const { nameProps } = this.props;
-    const { complete } = this.state;
 
     const schema = yup.object({
       name: yup
@@ -52,7 +53,7 @@ export default class SecretForm extends Component {
     });
     return (
       <>
-        {complete}
+        {complete && <Redirect to="/kubernetes/secrets" />}
         <Formik
           validationSchema={schema}
           onSubmit={this.handleSubmit}
